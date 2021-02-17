@@ -8,4 +8,4 @@ RUN npm install
 
 EXPOSE 4002
 
-CMD ["npm", "dev"]
+CMD ["npm", "run", "dev"]
