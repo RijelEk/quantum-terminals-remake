@@ -34,7 +34,7 @@ if (process.env.NODE_ENV !== 'production') {
 
   await createConnection({
       type: "postgres",
-      url:"postgresql://postgres:postgres@localhost:5432/memo",
+      url:process.env.DATABASE_URL,
       logging: true,
       migrations: [path.join(__dirname, "./migrations/*")],
       entities: [path.join(__dirname, "./entity/*")],

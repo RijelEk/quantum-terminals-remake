@@ -26,16 +26,12 @@
     "winston": "^3.3.3"
   },
   "scripts": {
-    "start": "node src/server.js",
-    "watch": "tsc -w",
-    "nodemon": "nodemon dist/server.js",
-    "dev": "npm-run-all --parallel  watch nodemon",
+    "watch": "ts-node-dev --respawn index.dev.ts",
     "typeorm": "node --require ts-node ./node_modules/typeorm/cli.js",
     "migration:up": " typeorm migration:run",
     "migration:down": "typeorm migration:revert",
     "migration:generate": "typeorm migration:generate -n 'orm_migrations'",
-    "migration:create": "typeorm migration:create -n 'orm_migrations'",
-    "synk:test": "snyk test"
+    "migration:create": "typeorm migration:create -n 'orm_migrations'"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
@@ -55,6 +51,7 @@
     "snyk": "^1.437.0",
     "ts-loader": "^8.0.11",
     "ts-node": "^9.1.0",
+    "ts-node-dev": "^1.1.1",
     "tsc": "^1.20150623.0",
     "type-graphql": "^1.1.1",
     "typescript": "^4.1.2"

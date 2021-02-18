@@ -1,10 +1,10 @@
 module.exports = {
    "type": "postgres",
-   "host": process.env.DB_HOST || "localhost",
-   "port": process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 5432,
-   "username": process.env.DB_USERNAME || "postgres",
-   "password": process.env.DB_PASSWORD || "password",
-   "database": process.env.DB_NAME || "databasetest2",
+   "host": process.env.DATABASE_HOST || "localhost",
+   "port": process.env.DATABASE_PORT || 5432,
+   "username": process.env.POSTGRES_USER || "postgres",
+   "password": process.env.POSTGRES_PASSWORD || "postgres",
+   "database": process.env.POSTGRES_DB || "memo",
     "entities": ["dist/entity/*.js"],
     "migrations": ["dist/migrations/*.js"],
     "cli": {

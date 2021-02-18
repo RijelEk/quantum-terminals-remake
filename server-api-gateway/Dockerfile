@@ -10,4 +10,4 @@ RUN npm install
 COPY ./server-api-gateway/ ./
 
 # Run in development mode
-CMD [ "npm", "run", "dev" ]
+CMD [ "npm", "run", "watch" ]

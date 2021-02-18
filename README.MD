@@ -32,5 +32,27 @@
 
 ## Folder Structurue
 
+## Environments
+
+### Server-api-gateway
+
+| NAME     |          | 
+|----------|:-------------:|
+| REDIS_URL |   |
+| DATABASE_URL |   |
+| DATABASE_PORT |   |
+| POSTGRES_DB |  |
+| POSTGRES_USER |   |
+| POSTGRES_PASSWORD |   |
+| PORT |   |
+
+### Database Gateway
+
+| NAME     |          | 
+|----------|:-------------:|
+| POSTGRES_DB |   |
+| POSTGRES_USER |   |
+| POSTGRES_PASSWORD |   |
+
 ## Deployment
 
