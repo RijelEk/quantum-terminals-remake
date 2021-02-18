@@ -3,13 +3,13 @@ services:
   server-api-getaway:
     build:
       context: "."
-      dockerfile: "./server-api-getaway/Dockerfile"
+      dockerfile: "./server-api-gateway/Dockerfile"
     depends_on:
       - db
     ports:
-      - "4000:4000"
+      - "7100:7100"
     volumes:
-      - ./server-api-getaway:/opt/app
+      - ./server-api-gateway:/usr/src/app
   db:
     image: postgres
     restart: always
