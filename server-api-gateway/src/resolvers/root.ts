@@ -1,7 +1,7 @@
 import MeResolver from "./User/Me";
 import FilesResolver from "./Files/Files";
 import LoginResolver from "./User/Login";
-import UploadFileResolver from "./Files/uploadFile";
+import UploadFileResolver from "./Files/UploadFile";
 import RegisterResolver from "./User/Register";
 import ConfirmUserResolver from "./User/ConfirmUser";
 
