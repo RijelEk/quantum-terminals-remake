@@ -1,0 +1,30 @@
+
+*,
+*::after,
+*::before{
+  margin:0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html{
+  font-size: 62.5%;
+  background: #dbe0e0;
+}
+
+body {
+  overflow-anchor: none;
+  width: 100%;
+  height: 100vh;
+}
+
+a{
+  text-decoration: none;
+  transition: .3s;
+}
+
+#root{
+  width: 100%;
+  height: 100%;
+}
+
