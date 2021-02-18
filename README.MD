@@ -36,19 +36,19 @@
 
 ### Server-api-gateway
 
-| NAME     |          | 
+| NAME     |      DESCRIPTION    | 
 |----------|:-------------:|
-| REDIS_URL |   |
-| DATABASE_URL |   |
-| DATABASE_PORT |   |
-| POSTGRES_DB |  |
-| POSTGRES_USER |   |
-| POSTGRES_PASSWORD |   |
-| PORT |   |
+| REDIS_URL |  <redis_server_url> |
+| DATABASE_URL | <database_postgresql_url>  |
+| DATABASE_PORT | <database_postgresql_port>  |
+| POSTGRES_DB | <database_postgresql_database_name>  |
+| POSTGRES_USER | <database_postgresql_database_user>  |
+| POSTGRES_PASSWORD |  <database_postgresql_database_password> |
+| PORT | <server-api-gateway-port>   |
 
 ### Database Gateway
 
-| NAME     |          | 
+| NAME     |     DESCRIPTION     | 
 |----------|:-------------:|
 | POSTGRES_DB |   |
 | POSTGRES_USER |   |
