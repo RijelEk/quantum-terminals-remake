@@ -1,11 +1,12 @@
-FROM node:alpine
+FROM node:12-alpine
 
-WORKDIR '/app'
+WORKDIR /app/client
 
-COPY package.json /app
+COPY ./client/package.json ./
 
 RUN npm install
 
-COPY . /app
+COPY ./client/ ./
 
-CMD ["npm", "start"]
+# Run in development mode
+CMD ["npm", "run", "dev"]

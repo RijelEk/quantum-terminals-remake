@@ -10,7 +10,7 @@ services:
     ports:
       - "7100:7100"
     volumes:
-      - ./server-api-gateway:/usr/src/app
+      - ./server-api-gateway:/usr/src/app/server-api-gateway
     environment:
       - REDIS_URL=redis://cache
       - DATABASE_URL=postgres://postgres:postgres@db:5432/memo
@@ -41,6 +41,18 @@ services:
     restart: always
     ports:
       - 6379:6379
+
+  client:
+    build:
+      context: "."
+      dockerfile: "./client/Dockerfile"
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./client:/usr/src/app/client
+    environment:
+      - SERVER_API_URL=http://localhost:7100/graphql
+
   
 volumes:
   pgdata:

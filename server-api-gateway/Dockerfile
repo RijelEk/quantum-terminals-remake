@@ -1,10 +1,9 @@
 FROM node:12-alpine
 
-WORKDIR /app
+WORKDIR /app/server-api-gateway
 
 COPY ./server-api-gateway/package.json ./
 
-#Install project dependencies
 RUN npm install
 
 COPY ./server-api-gateway/ ./
