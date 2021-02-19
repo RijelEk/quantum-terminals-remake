@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack --mode production",
-    "dev": "webpack serve --config webpack.dev.js",
+    "dev": "webpack serve  --config webpack.dev.js",
     "test": "jest --ci --reporters=default --reporters=jest-junit --testResultsProcessor=jest-junit",
     "test:update": "npm test -- -u",
     "test:coverage": "npm test - --coverage",

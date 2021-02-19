@@ -8,5 +8,7 @@ RUN npm install
 
 COPY ./client/ ./
 
+EXPOSE 8080
+
 # Run in development mode
 CMD ["npm", "run", "dev"]

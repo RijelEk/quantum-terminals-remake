@@ -12,6 +12,8 @@ services:
     volumes:
       - ./server-api-gateway:/usr/src/app/server-api-gateway
     environment:
+      CHOKIDAR_USEPOLLING: "true"
+    environment:
       - REDIS_URL=redis://cache
       - DATABASE_URL=postgres://postgres:postgres@db:5432/memo
       - DATABASE_PORT=5432
@@ -48,10 +50,14 @@ services:
       dockerfile: "./client/Dockerfile"
     ports:
       - "8080:8080"
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+    stdin_open: true
     volumes:
       - ./client:/usr/src/app/client
     environment:
       - SERVER_API_URL=http://localhost:7100/graphql
+      
 
   
 volumes:
