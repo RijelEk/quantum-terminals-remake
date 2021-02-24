@@ -4,23 +4,25 @@
 
 ![Alt text](readme/cover.jpg?raw=true "Cover")
 
-## Technologies
+### Technologies
 
-  - React.js 
-  - Apollo
-  - TypeScript
-  - GraphQL
-  - Node.js
-  - Express
-  - PostgreSQL
-  - TypeORM
-  - Docker
-  - Jest
-  - Cypress
-  - Terraform
-  - Travis CL
+- React.js
+- Apollo
+- TypeScript
+- GraphQL
+- Node.js
+- Express
+- PostgreSQL
+- TypeORM
+- Docker
+- Jest
+- Cypress
+- Terraform
+- Travis CL
 
-## Run
+# Server
+
+### Run
 
 ```sh
 
@@ -28,31 +30,63 @@
 
 ```
 
-## Testing
+**API-GATEWAY:** http://localhost:7100/graphql
 
-## Folder Structurue
+---
+
+### Structure
+
+- **server-api-gateway** - _graphql api gateway_
+
+- **server-admin-service** - _REST admin service_
+
+- **server-admin-service** - _REST game service (rules, score, statistics, etc.)_
+
+- **server-user-service** - _REST user service (auth)_
+
+### Testing
+
+```sh
+	$ yarn test
+
+```
 
 ## Environments
 
 ### Server-api-gateway
 
-| NAME     |      DESCRIPTION    | 
-|----------|:-------------:|
-| REDIS_URL |  <redis_server_url> |
-| DATABASE_URL | <database_postgresql_url>  |
-| DATABASE_PORT | <database_postgresql_port>  |
-| POSTGRES_DB | <database_postgresql_database_name>  |
-| POSTGRES_USER | <database_postgresql_database_user>  |
-| POSTGRES_PASSWORD |  <database_postgresql_database_password> |
-| PORT | <server-api-gateway-port>   |
+| NAME              |               DESCRIPTION               |
+| ----------------- | :-------------------------------------: |
+| REDIS_URL         |           <redis_server_url>            |
+| DATABASE_URL      |        <database_postgresql_url>        |
+| DATABASE_PORT     |       <database_postgresql_port>        |
+| POSTGRES_DB       |   <database_postgresql_database_name>   |
+| POSTGRES_USER     |   <database_postgresql_database_user>   |
+| POSTGRES_PASSWORD | <database_postgresql_database_password> |
+| PORT              |        <server-api-gateway-port>        |
 
-### Database Gateway
+### Database server-api-gateway
 
-| NAME     |     DESCRIPTION     | 
-|----------|:-------------:|
-| POSTGRES_DB |   |
-| POSTGRES_USER |   |
-| POSTGRES_PASSWORD |   |
+| NAME              |               DESCRIPTION               |
+| ----------------- | :-------------------------------------: |
+| POSTGRES_DB       |   <database_postgresql_database_name>   |
+| POSTGRES_USER     |   <database_postgresql_database_user>   |
+| POSTGRES_PASSWORD | <database_postgresql_database_password> |
 
-## Deployment
+# Client
 
+### Run
+
+```sh
+
+  $ docker-compose up
+
+```
+
+**CLIENT HOST:** http://localhost:8080/
+
+### Environments
+
+| NAME           |     DESCRIPTION      |
+| -------------- | :------------------: |
+| SERVER_API_URL | <server_graphql_url> |

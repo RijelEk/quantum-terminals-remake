@@ -1,12 +1,15 @@
 FROM node:12-alpine
 
-WORKDIR /app/client
+WORKDIR /usr/src/app
 
-COPY ./client/package.json ./
+COPY ./package.json ./
+COPY yarn.lock ./
 
-RUN npm install
+RUN yarn
 
-COPY ./client/ ./
+COPY . .
+
+RUN ls
 
 EXPOSE 8080
 

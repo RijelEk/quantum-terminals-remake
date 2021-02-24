@@ -4,14 +4,19 @@ import {
   createHttpLink,
   InMemoryCache,
 } from '@apollo/client'
-import { onError } from 'apollo-link-error'
-import { RetryLink } from 'apollo-link-retry'
+import { onError } from '@apollo/client/link/error'
 
+/**
+ * Creating api-gateway link
+ */
 const httpLink = createHttpLink({
-  uri: `${process.env.SERVER_API_URL}`,
+  uri: `http://localhost:7100/graphql`,
   credentials: 'include',
 })
 
+/**
+ * Catching high level graphql errors
+ */
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
     graphQLErrors.forEach(({ message, locations, path }) =>
@@ -22,20 +27,11 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (networkError) console.log(`[Network error]: ${networkError}`)
 })
 
-const retryLink = new RetryLink({
-  delay: {
-    initial: 300,
-    max: Infinity,
-    jitter: true,
-  },
-  attempts: {
-    max: 3,
-    retryIf: (error, _operation) => !!error,
-  },
-})
-
+/**
+ * Create Apollo Client
+ */
 export const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   credentials: 'include',
-  link: errorLink.concat(retryLink.concat(httpLink)),
+  link: errorLink.concat(httpLink) as any,
   cache: new InMemoryCache(),
 })

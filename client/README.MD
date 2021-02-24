@@ -1,1 +1,0 @@
-# memo The Quantum Terminals
