@@ -1,18 +1,24 @@
 
-## Client
+## ------ Client ------
+
 ./client/node_modules
+./client/.vscode
+./client/cache
+./client/dist
+
+## ------ Server ------
+
+### Server-api-gateway
+./server/server-api-getaway/node_modules
+./server/server-api-getaway/dist
+./server/server-api-getaway/cache
+
+### Server-admin-service
+./server/server-admin-service/node_modules
 
 
-## Server-api-gateway
-./server-api-getaway/node_modules
+### Server-game-service
+./server/server-game-service/node_modules
 
-
-## Server-admin-service
-./server-admin-service/node_modules
-
-
-## Server-game-service
-./server-game-service/node_modules
-
-## Server-user-service
-./server-user-service/node_modules
+### Server-user-service
+./server/server-user-service/node_modules
