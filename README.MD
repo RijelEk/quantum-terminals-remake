@@ -51,19 +51,6 @@
 
 ```
 
-For coverage
-
-```sh
-	$ yarn test:coverage
-
-```
-
-Update snapshots
-
-```sh
-	$ yarn test:update
-
-```
 
 ## Environments
 
@@ -104,3 +91,22 @@ Update snapshots
 | NAME           |     DESCRIPTION      |
 | -------------- | :------------------: |
 | SERVER_API_URL | <server_graphql_url> |
+
+### Testing
+
+```sh
+	$ yarn test
+
+```
+
+**For coverage**
+
+```sh
+	$ yarn test:coverage
+
+```
+
+**Update snapshots**
+
+```sh
+	$ yarn test:update
