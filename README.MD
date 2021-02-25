@@ -1,6 +1,6 @@
 # The Quantum Terminals Game
 
-(In progress...) This is a remake of my old simple 2D procedurally generated puzzle game The Quantum Terminals. In this build I experimented with microservices architecture, migrated project to GraphQL with TypeScript.
+(In progress...) This is a remake of my old simple 2D procedurally generated puzzle game **The Quantum Terminals**. In this build I experimented with **microservices architecture**, migrated project to **GraphQL** with **TypeScript**.
 
 ![Alt text](readme/cover.jpg?raw=true "Cover")
 
