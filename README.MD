@@ -58,7 +58,7 @@ For coverage
 
 ```
 
-Uopdate snapshots
+Update snapshots
 
 ```sh
 	$ yarn test:update
