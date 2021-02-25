@@ -51,6 +51,20 @@
 
 ```
 
+For coverage
+
+```sh
+	$ yarn test:coverage
+
+```
+
+Uopdate snapshots
+
+```sh
+	$ yarn test:update
+
+```
+
 ## Environments
 
 ### Server-api-gateway
