@@ -1,4 +1,5 @@
 type Rules = {
-  level: number,
+  level: number
   tiles: number
+  sets: number
 }
