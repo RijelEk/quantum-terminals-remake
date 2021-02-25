@@ -1,13 +1,68 @@
 import React, { useEffect, useState } from 'react'
+
+/* Utilities */
 import useGenerateLevelMemo from '@/utils/terminal_1/useGenerateLevelMemo'
-import { Board, Cell } from '@/UI/Terminals/Terminal_1/Board'
+
+/* UI */
+import LayoutTerminalOne from '@/components/Layout/Terminal__1'
+import {
+  Board,
+  Cell,
+  Decorator1,
+  Decorator2,
+  Decorator3,
+  Decorator4,
+  DecoratorCenter,
+} from '@/UI/Terminals/Terminal_1/Board'
+import { Timer } from '@/UI/Terminals/Terminal_1/Timer'
+import { Box } from '@/UI/Boxes/Box'
+import { Header2, Paragraph } from '@/UI/Text/Text'
+
+/* Components */
+import StandBy from '@/components/Miscellaneous/StandBy'
+import Offline from '@/components/Miscellaneous/Offline'
+import Dialogues from '@/components/Dialogues/Dialogues'
+
+type Dialogue = {
+  level: number
+  text: string[]
+}
+
+const DialoguesMemo: Dialogue[] = [
+  {
+    level: 1,
+    text: [
+      'Hello, my name is *Lasley*!',
+      'Welcome to *Terminal #1*. We are glad you made it here. We are ready to proceed to the first exercise',
+      'The rules are simple.',
+      'On the screen will appear white dots. You need to memorize their location and order in which they appear',
+      'When they disappear, the game starts. You need to click on square cells where were dots in exact same order. It is important',
+      "You will have *limited time*. So don't waste it.",
+      'Remember. *Keep your mind clean* and everything will be alright.',
+      'If you make a mistake, the game will start again.',
+    ],
+  },
+  {
+    level: 2,
+    text: [
+      'Congratulations!',
+      'You completed your first puzzle. Keep on going and succes will not keep you waiting',
+    ],
+  },
+  {
+    level: 5,
+    text: ['You are doing great!'],
+  },
+]
 
 const Memo = () => {
   const size = 30 // size of the map
   const CURRENT__GAME = 'memo'
 
-  const [loading, setLoading] = useState<boolean>(true)
-  const [level, setLevel] = useState(null)
+  const [loading, setLoading] = useState<boolean>(true) // page loading
+  const [level, setLevel] = useState(null) // generated level
+  const [gameStatus, setGameStatus] = useState<string>('offline') // start game | offline | stand by | play |
+  const [dialogueStatus, setDialogueStatus] = useState<null | string[]>(null)
 
   const mockedGame: mockGame[] = JSON.parse(localStorage.getItem('game'))
 
@@ -19,10 +74,17 @@ const Memo = () => {
       const currentGame = mockedGame.find(
         (game) => game.title === CURRENT__GAME,
       )
-      const { level } = currentGame
+      /* Get anonim user dialogue */
+      const dialogue: Dialogue = DialoguesMemo.find(
+        (dial) => dial.level === currentGame.level,
+      )
+      if (dialogue) {
+        setDialogueStatus(dialogue.text)
+        console.log(dialogue)
+      }
       /* Generate level */
       do {
-        const level_get = useGenerateLevelMemo(level)
+        const level_get = useGenerateLevelMemo(currentGame.level)
         result = [...level_get]
 
         if (!level_get.includes(undefined)) {
@@ -44,7 +106,11 @@ const Memo = () => {
           active={level.includes(i)}
           first={level[0] === i}
         >
-          {level.includes(i) ? level.indexOf(i) : ''}
+          <DecoratorCenter>+</DecoratorCenter>
+          <Decorator1>+</Decorator1>
+          <Decorator2>+</Decorator2>
+          <Decorator3>+</Decorator3>
+          <Decorator4>+</Decorator4>
         </Cell>,
       ]
     }
@@ -56,9 +122,24 @@ const Memo = () => {
   }
 
   return (
-    <div>
-      <Board>{CellGen().map((el) => el)}</Board>
-    </div>
+    <LayoutTerminalOne logo>
+      <Box h="100px">
+        <Box mb={5}>
+          <Paragraph size="2.4rem" center>
+            Time Left
+          </Paragraph>
+        </Box>
+        <Timer>00:00:00</Timer>
+      </Box>
+      <Box mt={20}>
+        <Board>
+          {gameStatus === 'offline' ? <Offline /> : null}
+          {gameStatus === 'stand by' ? <StandBy /> : null}
+          {CellGen().map((el) => el)}
+        </Board>
+      </Box>
+      {dialogueStatus ? <Dialogues dialogue={dialogueStatus} /> : null}
+    </LayoutTerminalOne>
   )
 }
 

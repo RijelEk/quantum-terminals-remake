@@ -3,7 +3,7 @@ import { Box } from '@/UI/Boxes/Box'
 import Snow from '@/components/Miscellaneous/Snow'
 import Logo from '@/components/Miscellaneous/Logo'
 
-export default function LayoutMenu({
+export default function TerminalOne({
   children,
   logo,
 }: {
@@ -15,10 +15,10 @@ export default function LayoutMenu({
       position="fixed"
       w="100%"
       h="100%"
-      backgroundSrc="/public/images/menu/bg_big.jpg"
-      backgroundPosition="center"
+      backgroundSrc="/public/images/terminal_1/BG.png"
+      backgroundPosition="left 103%"
       backgroundRepeat="no-repeat"
-      backgroundSize="cover"
+      backgroundSize="28%"
     >
       <Box
         zIndex={10}

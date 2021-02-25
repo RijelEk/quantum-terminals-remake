@@ -1,41 +1,63 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 interface IBox {
-  top?: string | number;
-  left?: string | number;
-  w?: string;
-  h?: string;
-  disp?: string;
-  jc?: string;
-  ai?: string;
-  fd?: string;
-  center?: boolean;
-  mt?: string | number;
-  mb?: string | number;
-  mr?: string | number;
-  ml?: string | number;
-  pr?: string | number;
-  pl?: string | number;
-  pt?: string | number;
-  pb?: string | number;
-  float?: string;
-  position?: string;
-  hover?: boolean;
-  overflowYAuto?: boolean;
-  overflowXHidden?: boolean;
-  backgroundSize?: string;
-  backgroundRepeat?: string;
-  backgroundPosition?: string;
-  backgroundSrc?: string;
-  margin?: string;
-  overflow?: string;
-  zIndex?:number
+  top?: string | number
+  left?: string | number
+  bottom?: string | number
+  w?: string
+  h?: string
+  disp?: string
+  jc?: string
+  ai?: string
+  fd?: string
+  center?: boolean
+  mt?: string | number
+  mb?: string | number
+  mr?: string | number
+  ml?: string | number
+  pr?: string | number
+  pl?: string | number
+  pt?: string | number
+  pb?: string | number
+  float?: string
+  position?: string
+  hover?: boolean
+  overflowYAuto?: boolean
+  overflowXHidden?: boolean
+  backgroundSize?: string
+  backgroundRepeat?: string
+  backgroundPosition?: string
+  backgroundSrc?: string
+  margin?: string
+  overflow?: string
+  zIndex?: number
+  transform?: string
 }
 
 export const Box = styled.div<IBox>`
-  width: ${(props) => (props.w ? props.w : "auto")};
-  height: ${(props) => (props.h ? props.h : "auto")};
-  display: ${(props) => (props.disp ? props.disp : "block")};
+  width: ${(props) => (props.w ? props.w : 'auto')};
+  height: ${(props) => (props.h ? props.h : 'auto')};
+  display: ${(props) => (props.disp ? props.disp : 'block')};
+  ${(props) =>
+    props.transform &&
+    `
+    transform: ${props.transform};
+    `};
+  ${(props) =>
+    props.top &&
+    `
+   top: ${props.top};
+    `};
+  ${(props) =>
+    props.bottom &&
+    `
+   bottom: ${props.bottom};
+    `};
+  ${(props) =>
+    props.left &&
+    `
+   left: ${props.left};
+    `};
   ${(props) =>
     props.zIndex &&
     `
@@ -146,14 +168,14 @@ export const Box = styled.div<IBox>`
     `
         float: ${props.float};
    `};
-   ${(props) =>
+  ${(props) =>
     props.overflow &&
     `
     overflow: ${props.overflow};
    `};
-   ${(props) =>
+  ${(props) =>
     props.background &&
     `
         background: ${props.float};
    `};
-`;
+`
