@@ -8,7 +8,11 @@ type TypographyPropTypes = {
 export const Paragraph = styled.p<TypographyPropTypes>`
   font-size: ${(props) => (props.size ? props.size : '1.4rem')};
   color: ${(props) =>
-    props.color ? props.color : props.theme.colors.font.primary};
+    props.color
+      ? props.color
+      : props.fade
+      ? props.theme.colors.font.fade
+      : props.theme.colors.font.primary};
 
   ${(props) =>
     props.center &&

@@ -26,24 +26,27 @@ import Dialogues from '@/components/Dialogues/Dialogues'
 type Dialogue = {
   level: number
   text: string[]
+  character: string
 }
 
 const DialoguesMemo: Dialogue[] = [
   {
     level: 1,
+    character: 'Lasley',
     text: [
-      'Hello, my name is *Lasley*!',
-      'Welcome to *Terminal #1*. We are glad you made it here. We are ready to proceed to the first exercise',
+      'Hello, my name is Lasley!',
+      'Welcome to Terminal #1. We are glad you made it here. We are ready to proceed to the first exercise',
       'The rules are simple.',
       'On the screen will appear white dots. You need to memorize their location and order in which they appear',
       'When they disappear, the game starts. You need to click on square cells where were dots in exact same order. It is important',
-      "You will have *limited time*. So don't waste it.",
-      'Remember. *Keep your mind clean* and everything will be alright.',
+      "You will have limited time. So don't waste it.",
+      'Remember. Keep your mind clean and everything will be alright.',
       'If you make a mistake, the game will start again.',
     ],
   },
   {
     level: 2,
+    character: 'Lasley',
     text: [
       'Congratulations!',
       'You completed your first puzzle. Keep on going and succes will not keep you waiting',
@@ -51,6 +54,7 @@ const DialoguesMemo: Dialogue[] = [
   },
   {
     level: 5,
+    character: 'Lasley',
     text: ['You are doing great!'],
   },
 ]
@@ -62,7 +66,7 @@ const Memo = () => {
   const [loading, setLoading] = useState<boolean>(true) // page loading
   const [level, setLevel] = useState(null) // generated level
   const [gameStatus, setGameStatus] = useState<string>('offline') // start game | offline | stand by | play |
-  const [dialogueStatus, setDialogueStatus] = useState<null | string[]>(null)
+  const [dialogueStatus, setDialogueStatus] = useState<null | Dialogue>(null)
 
   const mockedGame: mockGame[] = JSON.parse(localStorage.getItem('game'))
 
@@ -79,7 +83,7 @@ const Memo = () => {
         (dial) => dial.level === currentGame.level,
       )
       if (dialogue) {
-        setDialogueStatus(dialogue.text)
+        setDialogueStatus(dialogue)
         console.log(dialogue)
       }
       /* Generate level */
@@ -138,7 +142,12 @@ const Memo = () => {
           {CellGen().map((el) => el)}
         </Board>
       </Box>
-      {dialogueStatus ? <Dialogues dialogue={dialogueStatus} /> : null}
+      {dialogueStatus ? (
+        <Dialogues
+          dialogue={dialogueStatus.text}
+          character={dialogueStatus.character}
+        />
+      ) : null}
     </LayoutTerminalOne>
   )
 }

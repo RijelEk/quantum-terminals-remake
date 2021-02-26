@@ -15,7 +15,9 @@ export const theme: DefaultTheme = {
     },
     font: {
       primary: '#333131',
+      fade: '#6d6d6d',
     },
+    buttonDialogue: '#988670',
     background: '#dbe0e0',
     eq: '#999797',
     borders: '#333131',

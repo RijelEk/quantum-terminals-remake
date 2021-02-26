@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box } from '@/UI/Boxes/Box'
 import Snow from '@/components/Miscellaneous/Snow'
-import Logo from '@/components/Miscellaneous/Logo'
+import LogoMinified from '@/components/Miscellaneous/LogoMinified'
 
 export default function TerminalOne({
   children,
@@ -31,7 +31,7 @@ export default function TerminalOne({
         w="450px"
         h="100%"
       >
-        {logo ? <Logo /> : null}
+        {logo ? <LogoMinified /> : null}
         {children}
       </Box>
       <Snow />
