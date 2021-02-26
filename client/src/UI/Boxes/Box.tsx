@@ -39,6 +39,11 @@ export const Box = styled.div<IBox>`
   height: ${(props) => (props.h ? props.h : 'auto')};
   display: ${(props) => (props.disp ? props.disp : 'block')};
   ${(props) =>
+    props.blur &&
+    `
+    filter: blur(1px);
+    `};
+  ${(props) =>
     props.transform &&
     `
     transform: ${props.transform};

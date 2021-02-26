@@ -9,7 +9,7 @@ import {
 } from '@/UI/Terminals/Shared/Dialogues'
 import { Box } from '@/UI/Boxes/Box'
 
-export default function Dialogues({ dialogue, character }) {
+export default function Dialogues({ dialogue, character, _finishDialogue }) {
   const [start, setStart] = useState<boolean>(false)
   const [iteration, setIteration] = useState<number>(0)
   const [finishedTyping, setFinished] = useState<boolean>(false)
@@ -18,7 +18,6 @@ export default function Dialogues({ dialogue, character }) {
   // const currentLine: string = dialogue[iteration];
 
   useEffect(() => {
-    console.log('Fire effect')
     setCurrentLine(null)
     setTimeout(() => {
       setCurrentLine(dialogue[iteration])
@@ -77,7 +76,15 @@ export default function Dialogues({ dialogue, character }) {
           </DialogueText>
         ) : null}
         {finishedTyping ? (
-          <DialogueButton onClick={() => _nextLine()}>...</DialogueButton>
+          <DialogueButton
+            onClick={() =>
+              iteration === dialogue.length - 1
+                ? _finishDialogue()
+                : _nextLine()
+            }
+          >
+            ...
+          </DialogueButton>
         ) : null}
       </DialoguePlaceholder>
     </Box>

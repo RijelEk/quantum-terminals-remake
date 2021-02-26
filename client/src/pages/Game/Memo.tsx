@@ -23,6 +23,9 @@ import StandBy from '@/components/Miscellaneous/StandBy'
 import Offline from '@/components/Miscellaneous/Offline'
 import Dialogues from '@/components/Dialogues/Dialogues'
 
+import { useModalState, useModalDispatch } from '@/context/confirmModal'
+import { useStartGameState, useStartGameDispatch } from '@/context/startGame'
+
 type Dialogue = {
   level: number
   text: string[]
@@ -34,7 +37,7 @@ const DialoguesMemo: Dialogue[] = [
     level: 1,
     character: 'Lasley',
     text: [
-      'Hello, my name is Lasley!',
+      'Hello, my name is Lasley! I will guide you in this terminal.',
       'Welcome to Terminal #1. We are glad you made it here. We are ready to proceed to the first exercise',
       'The rules are simple.',
       'On the screen will appear white dots. You need to memorize their location and order in which they appear',
@@ -69,6 +72,30 @@ const Memo = () => {
   const [dialogueStatus, setDialogueStatus] = useState<null | Dialogue>(null)
 
   const mockedGame: mockGame[] = JSON.parse(localStorage.getItem('game'))
+
+  const stateConfirmModal = useModalState()
+  const dispatchConfirmModal = useModalDispatch()
+
+  console.warn('State confirm modal')
+  console.log(stateConfirmModal)
+
+  const stateStartGame = useStartGameState()
+  const dispatchStartGame = useStartGameDispatch()
+
+  console.warn('State start game')
+  console.log(stateStartGame)
+
+  const _finishDialogue = () => {
+    setDialogueStatus(null)
+    dispatchConfirmModal({
+      type: 'ADD__MODAL',
+      name: 'Are you ready?',
+      message: 'The game is ready to be started',
+      confirm: dispatchStartGame({
+        game: 'memo',
+      }),
+    })
+  }
 
   useEffect(() => {
     let result = [undefined]
@@ -128,14 +155,16 @@ const Memo = () => {
   return (
     <LayoutTerminalOne logo>
       <Box h="100px">
-        <Box mb={5}>
+        <Box blur={dialogueStatus} mb={5}>
           <Paragraph size="2.4rem" center>
             Time Left
           </Paragraph>
         </Box>
-        <Timer>00:00:00</Timer>
+        <Box blur={dialogueStatus}>
+          <Timer>00:00:00</Timer>
+        </Box>
       </Box>
-      <Box mt={20}>
+      <Box blur={dialogueStatus} mt={20}>
         <Board>
           {gameStatus === 'offline' ? <Offline /> : null}
           {gameStatus === 'stand by' ? <StandBy /> : null}
@@ -146,6 +175,7 @@ const Memo = () => {
         <Dialogues
           dialogue={dialogueStatus.text}
           character={dialogueStatus.character}
+          _finishDialogue={_finishDialogue}
         />
       ) : null}
     </LayoutTerminalOne>
