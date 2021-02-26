@@ -91,9 +91,7 @@ const Memo = () => {
       type: 'ADD__MODAL',
       name: 'Are you ready?',
       message: 'The game is ready to be started',
-      confirm: dispatchStartGame({
-        game: 'memo',
-      }),
+      confirm: 'DISPATCH__START__GAME',
     })
   }
 

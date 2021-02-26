@@ -77,7 +77,7 @@ export const DialogueButton = styled.button`
   }
 
   &:hover {
-    transform: scale(1.1) translateY(-2px);
+    transform: scale(1.1) translateY(-2px) rotate3d(-0.001, 0.01, 0, 26deg);
     background-color: #ad9980;
   }
 `

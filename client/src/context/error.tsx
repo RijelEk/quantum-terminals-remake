@@ -8,15 +8,16 @@ const REMOVE__ERROR = 'REMOVE__ERROR'
 const ADD__FORM__ERROR = 'ADD__FORM__ERROR'
 const REMOVE__FORM__ERROR = 'REMOVE__FORM__ERROR'
 
-type Action = { type: string; name: string; message: string; form?: string }
 type State = {
   name: string
   message: string
   form?: string
 }
+
+type Action = State & { type: string }
 type ModalProviderProps = { children: React.ReactNode }
 
-function modalReducer(state: State[] | null, action) {
+function modalReducer(state: State[] | null, action: Action) {
   switch (action.type) {
     case ADD__ERROR: {
       return [

@@ -6,21 +6,22 @@ const ConfirmModalContextDispatch = React.createContext(null)
 const ADD__MODAL = 'ADD__MODAL'
 const REMOVE__MODAL = 'REMOVE__MODAL'
 
-type Action = { type: typeof ADD__MODAL } | { type: typeof REMOVE__MODAL }
 type State = {
   name: string
   message: string
   confirm: string
 }
+
+type Action = State & { type: string }
 type ModalProviderProps = { children: React.ReactNode }
 
-function modalReducer(state: State | null, action) {
+function modalReducer(state: State | null, action: Action) {
   switch (action.type) {
     case ADD__MODAL: {
       return {
         name: action.name,
         message: action.message,
-        confirm: action.confirmAction,
+        confirm: action.confirm,
       }
     }
     case REMOVE__MODAL: {

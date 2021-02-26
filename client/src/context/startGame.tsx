@@ -1,18 +1,21 @@
 import React from 'react'
 
+/* Declare Context */
 const StartGameContextState = React.createContext(null)
 const StartGameContextDispatch = React.createContext(null)
 
+/* Actions */
 const START__GAME = 'START__GAME'
 const STOP__GAME = 'STOP__GAME'
 
-type Action = { type: string; game: string }
 type State = {
   game: string
   start: boolean
 }
-type ModalProviderProps = { children: React.ReactNode }
+type Action = State & { type: string }
+type StartGameProviderProps = { children: React.ReactNode }
 
+/* Reducer */
 function startGameReducer(state: State | null, action: Action) {
   switch (action.type) {
     case START__GAME: {
@@ -30,7 +33,8 @@ function startGameReducer(state: State | null, action: Action) {
   }
 }
 
-function StartGameProvider({ children }: ModalProviderProps) {
+/* Provider */
+function StartGameProvider({ children }: StartGameProviderProps) {
   const [state, dispatch] = React.useReducer(startGameReducer, null)
   return (
     <StartGameContextState.Provider value={state}>
@@ -41,6 +45,7 @@ function StartGameProvider({ children }: ModalProviderProps) {
   )
 }
 
+/* Custom hooks */
 function useStartGameState() {
   const context = React.useContext(StartGameContextState)
   if (context === undefined) {
@@ -48,6 +53,7 @@ function useStartGameState() {
   }
   return context
 }
+
 function useStartGameDispatch() {
   const context = React.useContext(StartGameContextDispatch)
   if (context === undefined) {
