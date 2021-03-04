@@ -18,7 +18,6 @@
 - Jest
 - Cypress
 - Terraform
-- Travis CL
 
 # Server
 
@@ -26,7 +25,12 @@
 
 ```sh
 
-  $ docker-compose up
+	# in client derictory
+  docker-compose up
+
+	# in a separate terminal, inside service folders
+	yarn
+	yarn watch
 
 ```
 
@@ -50,7 +54,6 @@
 	$ yarn test
 
 ```
-
 
 ## Environments
 
@@ -80,7 +83,12 @@
 
 ```sh
 
-  $ docker-compose up
+	# in server derictory
+  docker-compose up
+
+	# in a separate terminal, inside client folder
+	yarn
+	yarn watch
 
 ```
 
@@ -110,3 +118,4 @@
 
 ```sh
 	$ yarn test:update
+```
