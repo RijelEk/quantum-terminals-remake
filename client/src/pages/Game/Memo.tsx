@@ -5,26 +5,14 @@ import useGenerateLevelMemo from '@/utils/terminal_1/useGenerateLevelMemo'
 
 /* UI */
 import LayoutTerminalOne from '@/components/Layout/Terminal__1'
-import {
-  Board,
-  Cell,
-  Decorator1,
-  Decorator2,
-  Decorator3,
-  Decorator4,
-  DecoratorCenter,
-} from '@/UI/Terminals/Terminal_1/Board'
-import { Timer } from '@/UI/Terminals/Terminal_1/Timer'
-import { Box } from '@/UI/Boxes/Box'
-import { Header2, Paragraph } from '@/UI/Text/Text'
 
 /* Components */
-import StandBy from '@/components/Miscellaneous/StandBy'
-import Offline from '@/components/Miscellaneous/Offline'
 import Dialogues from '@/components/Dialogues/Dialogues'
+import Header from '@/components/Memo/Header'
+import GameBoard from '@/components/Memo/Board'
 
 import { useModalState, useModalDispatch } from '@/context/confirmModal'
-import { useStartGameState, useStartGameDispatch } from '@/context/startGame'
+import { useStartGameState } from '@/context/startGame'
 
 type Dialogue = {
   level: number
@@ -63,7 +51,6 @@ const DialoguesMemo: Dialogue[] = [
 ]
 
 const Memo = () => {
-  const size = 30 // size of the map
   const CURRENT__GAME = 'memo'
 
   const [loading, setLoading] = useState<boolean>(true) // page loading
@@ -80,10 +67,49 @@ const Memo = () => {
   console.log(stateConfirmModal)
 
   const stateStartGame = useStartGameState()
-  const dispatchStartGame = useStartGameDispatch()
 
   console.warn('State start game')
   console.log(stateStartGame)
+
+  useEffect(() => {
+    if (stateStartGame) {
+      setGameStatus('stand by')
+      /* Generate level */
+      let result = [undefined]
+      const currentGame = mockedGame.find(
+        (game) => game.title === CURRENT__GAME,
+      )
+
+      do {
+        const level_get = useGenerateLevelMemo(currentGame.level)
+        result = [...level_get]
+
+        if (!level_get.includes(undefined)) {
+          setLevel(level_get)
+          setGameStatus('play')
+        }
+      } while (result.includes(undefined))
+    }
+  }, [stateStartGame])
+
+  useEffect(() => {
+    if (mockedGame) {
+      /* Get anonim user level */
+      const currentGame = mockedGame.find(
+        (game) => game.title === CURRENT__GAME,
+      )
+
+      /* Get anonim user dialogue */
+      const dialogue: Dialogue = DialoguesMemo.find(
+        (dial) => dial.level === currentGame.level,
+      )
+      if (dialogue) {
+        setDialogueStatus(dialogue)
+        setLoading(false)
+        console.log(dialogue)
+      }
+    }
+  }, [])
 
   const _finishDialogue = () => {
     setDialogueStatus(null)
@@ -95,80 +121,18 @@ const Memo = () => {
     })
   }
 
-  useEffect(() => {
-    let result = [undefined]
-
-    if (mockedGame) {
-      /* Get anonim user level */
-      const currentGame = mockedGame.find(
-        (game) => game.title === CURRENT__GAME,
-      )
-      /* Get anonim user dialogue */
-      const dialogue: Dialogue = DialoguesMemo.find(
-        (dial) => dial.level === currentGame.level,
-      )
-      if (dialogue) {
-        setDialogueStatus(dialogue)
-        console.log(dialogue)
-      }
-      /* Generate level */
-      do {
-        const level_get = useGenerateLevelMemo(currentGame.level)
-        result = [...level_get]
-
-        if (!level_get.includes(undefined)) {
-          setLoading(false)
-          setLevel(level_get)
-        }
-      } while (result.includes(undefined))
-    }
-  }, [])
-
-  const CellGen = () => {
-    let components = []
-    for (let i = 1; i < size + 1; i++) {
-      components = [
-        ...components,
-        <Cell
-          key={i}
-          data-attr={i}
-          active={level.includes(i)}
-          first={level[0] === i}
-        >
-          <DecoratorCenter>+</DecoratorCenter>
-          <Decorator1>+</Decorator1>
-          <Decorator2>+</Decorator2>
-          <Decorator3>+</Decorator3>
-          <Decorator4>+</Decorator4>
-        </Cell>,
-      ]
-    }
-    return components
-  }
-
   if (loading) {
     return <div>Loading ...</div>
   }
 
   return (
     <LayoutTerminalOne logo>
-      <Box h="100px">
-        <Box blur={dialogueStatus} mb={5}>
-          <Paragraph size="2.4rem" center>
-            Time Left
-          </Paragraph>
-        </Box>
-        <Box blur={dialogueStatus}>
-          <Timer>00:00:00</Timer>
-        </Box>
-      </Box>
-      <Box blur={dialogueStatus} mt={20}>
-        <Board>
-          {gameStatus === 'offline' ? <Offline /> : null}
-          {gameStatus === 'stand by' ? <StandBy /> : null}
-          {CellGen().map((el) => el)}
-        </Board>
-      </Box>
+      <Header dialogueStatus={dialogueStatus} time="00:00:00" />
+      <GameBoard
+        dialogueStatus={dialogueStatus}
+        gameStatus={gameStatus}
+        level={level}
+      />
       {dialogueStatus ? (
         <Dialogues
           dialogue={dialogueStatus.text}

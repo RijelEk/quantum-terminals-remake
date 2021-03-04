@@ -34,6 +34,7 @@ export const Modal = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 
   animation: ${popup};
   animation-fill-mode: forwards;

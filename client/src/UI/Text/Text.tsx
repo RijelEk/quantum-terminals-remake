@@ -21,6 +21,8 @@ export const Paragraph = styled.p<TypographyPropTypes>`
     `
       text-align:center;
    `}
+  pointer-events: none;
+  cursor: initial;
 `
 
 export const Header = styled.h1<TypographyPropTypes>`
@@ -32,6 +34,8 @@ export const Header = styled.h1<TypographyPropTypes>`
       : props.bright
       ? props.theme.colors.background
       : props.theme.colors.font.primary};
+  pointer-events: none;
+  cursor: initial;
 `
 
 export const Header2 = styled.h2<TypographyPropTypes>`
@@ -43,6 +47,8 @@ export const Header2 = styled.h2<TypographyPropTypes>`
       : props.bright
       ? props.theme.colors.background
       : props.theme.colors.font.primary};
+  pointer-events: none;
+  cursor: initial;
 `
 
 export const Header3 = styled.h2<TypographyPropTypes>`
@@ -54,4 +60,7 @@ export const Header3 = styled.h2<TypographyPropTypes>`
       : props.bright
       ? props.theme.colors.background
       : props.theme.colors.font.primary};
+
+  pointer-events: none;
+  cursor: initial;
 `
