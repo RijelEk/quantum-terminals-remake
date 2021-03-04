@@ -1,11 +1,14 @@
-FROM node:12
+FROM node:12-alpine
 
-COPY . /opt/app
+WORKDIR /app/server-user-service
 
-WORKDIR /opt/app/server-user-service
+COPY ./server-user-service/package.json ./
 
 RUN npm install
 
-EXPOSE 4001
+COPY ./server-user-service/ ./
 
-CMD ["npm", "run", "dev"]
+RUN ls
+
+# Run in development mode
+CMD [ "npm", "run", "watch" ]
