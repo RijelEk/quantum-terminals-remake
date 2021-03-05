@@ -29,48 +29,39 @@ services:
       - POSTGRES_DB=memo
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-      - pgconf:/etc/postgresql
-      - pglog:/var/log/postgresql
     ports:
-      - "5433:5432"
+      - "3336:3306"
 
   server-user-service:
     build:
       context: "."
       dockerfile: "./server-user-service/Dockerfile"
     depends_on:
-      - db_user
-      - redis
+      - user-service-db
     ports:
-      - "7200:7200"
+      - "7000:7000"
     volumes:
       - ./server-user-service:/usr/src/app/server-user-service
     environment:
       - CHOKIDAR_USEPOLLING=true
       - REDIS_URL=redis://cache
-      - DATABASE_URL=postgres://postgres:postgres@db_user:3306/memo_user
-      - DATABASE_PORT=3306
+      - DATABASE_URL=postgres://postgres:postgres@user-service-db:5432/memo
+      - DATABASE_PORT=5432
       - DATABASE_HOST=host.docker.internal
-      - POSTGRES_DB=memo_user
+      - POSTGRES_DB=memo
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - PORT=7200
+      - PORT=7000
 
-  db_user:
+  user-service-db:
     image: postgres
     restart: always
     environment:
-      - POSTGRES_DB=memo_user
+      - POSTGRES_DB=memo
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-      - pgconf:/etc/postgresql
-      - pglog:/var/log/postgresql
     ports:
-      - 0.0.0.0:7201:3306
+      - "3307:3306"
 
   redis:
     image: redis

@@ -42,7 +42,7 @@ const server = async () => {
     synchronize: true,
   }); //connect database
 
-  const PORT = process.env.PORT || 4000;
+  const PORT = process.env.PORT || 7100;
   app.listen(PORT, () => {
     console.log(`🚀 Server ready at http://localhost:${PORT}/`);
   });
