@@ -82,7 +82,7 @@ yarn watch
 ### Run
 
 ```
-# in server derictory
+# in server directory
 docker-compose up
 
 # in a separate terminal, inside client folder
