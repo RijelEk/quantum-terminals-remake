@@ -25,12 +25,12 @@
 
 ```sh
 
-	# in client derictory
-  docker-compose up
+# in client directory
+docker-compose up
 
-	# in a separate terminal, inside service folders
-	yarn
-	yarn watch
+# in a separate terminal, inside service folders
+yarn
+yarn watch
 
 ```
 
