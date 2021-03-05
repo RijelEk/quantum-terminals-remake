@@ -81,14 +81,13 @@ yarn watch
 
 ### Run
 
-```sh
+```
+# in server derictory
+docker-compose up
 
-	# in server derictory
-  docker-compose up
-
-	# in a separate terminal, inside client folder
-	yarn
-	yarn watch
+# in a separate terminal, inside client folder
+yarn
+yarn watch
 
 ```
 
