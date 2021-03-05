@@ -9,7 +9,7 @@ export default {
     { req }: { req: Request }
   ) => {
     const user: User | undefined = await User.findOne({ where: { email } });
-    console.log("logni");
+
     if (!user) {
       return {
         error: {
@@ -41,8 +41,6 @@ export default {
       };
     }
 
-    console.log(user.id);
-    console.log(req.session);
     req.session!.userId = user.id;
 
     return {

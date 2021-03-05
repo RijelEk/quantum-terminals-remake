@@ -4,11 +4,11 @@ WORKDIR /app/server-user-service
 
 COPY ./server-user-service/package.json ./
 
-RUN npm install
+RUN yarn
 
 COPY ./server-user-service/ ./
 
 RUN ls
 
 # Run in development mode
-CMD [ "npm", "run", "watch" ]
+CMD [ "yarn", "run", "watch" ]

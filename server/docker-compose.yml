@@ -45,7 +45,7 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
       - REDIS_URL=redis://cache
-      - DATABASE_URL=postgres://postgres:postgres@user-service-db:5432/memo
+      - DATABASE_URL=postgres://postgres:postgres@user-service-db/memo
       - DATABASE_PORT=5432
       - DATABASE_HOST=host.docker.internal
       - POSTGRES_DB=memo
@@ -61,7 +61,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
-      - "3307:3306"
+      - "0.0.0.0:5432:3336"
 
   redis:
     image: redis

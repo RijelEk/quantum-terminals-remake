@@ -1,6 +1,6 @@
-import { User } from "../../entity/User";
-import bcrypt from "bcryptjs";
 import { Request } from "express";
+
+import UsersService from "../../adapter/UserService";
 import { sendEmail } from "../../utils/sendEmail";
 import { createConfirmationUrl } from "../../utils/createConfirmationUrl";
 
@@ -20,52 +20,28 @@ export default {
     },
     { req }: { req: Request }
   ) => {
-    /* Check Confirm Password */
-    if (password != confirm_password) {
-      return {
-        error: {
-          field: ["confirm_password"],
-          message: "Confirm password doesn't match",
-        },
-        user: null,
-      };
-    }
-
-    /* Check password length */
-    if (password.length < 3) {
-      return {
-        error: {
-          field: ["password"],
-          message: "The password should be at least 3 symbols long",
-        },
-        user: null,
-      };
-    }
-
-    /* Check if user already exist */
-    const userFind = await User.findOne({ email: email });
-    if (userFind) {
-      return {
-        error: {
-          field: ["email"],
-          message: "User with this email already exists",
-        },
-        user: null,
-      };
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 12);
-    const user = await User.create({
-      username,
+    const resp: any = await UsersService.createUser({
       email,
-      password: hashedPassword,
-    }).save();
+      password,
+      confirm_password,
+      username,
+    });
 
-    await sendEmail(username, email, await createConfirmationUrl(user.id));
-
-    return {
-      user: user,
-      error: null,
-    };
+    if (resp.error) {
+      return {
+        user: null,
+        error: resp.error,
+      };
+    } else {
+      await sendEmail(
+        username,
+        email,
+        await createConfirmationUrl(resp.user.id)
+      );
+      return {
+        user: resp.user,
+        error: null,
+      };
+    }
   },
 };
